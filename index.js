@@ -31,12 +31,17 @@ const nextISSTimesForMyLocation = (callback) => {
   });
 };
 
-nextISSTimesForMyLocation((error, passTimes) => {
-  if (error) {
-    return console.log('It didn\'t work', error);
-  }
+const printPassTimes = passTimes => {
   for (const passTime of passTimes) {
     const date = new Date(passTime.risetime * 1000);
     console.log(`Next pass at ${date} for ${passTime.duration} seconds`);
   }
+};
+
+nextISSTimesForMyLocation((error, passTimes) => {
+  if (error) {
+    return console.log('It didn\'t work', error);
+  }
+  printPassTimes(passTimes);
 });
+// TZ='America/Edmonton'
